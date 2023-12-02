@@ -7,6 +7,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+import java.util.Date;
+
 @Entity
 @Table(name = "aracislem")
 public class Aracislem {
@@ -52,14 +54,20 @@ public class Aracislem {
 	@Column( name = "odeme_yontemi")
 	private Integer odemeYontemi;
 	
-	
+	@Column( name = "giris_tarih")
+	private Date girisTarih;
+
+	@Column( name = "cikis_tarih")
+	private Date cikisTarih;
+
+
 
 
 	public Aracislem() {
 		
 	}
 	
-	public Aracislem(String name, String plaka, String numara, String email, boolean aktif, long islemler, String renk, String marka,int fiyat) {
+	public Aracislem(String name, String plaka, String numara, String email, boolean aktif, long islemler, String renk, String marka,int fiyat, Date girisTarih , Date cikisTarih) {
 		super();
 		this.name = name;
 		this.plaka = plaka;
@@ -70,6 +78,8 @@ public class Aracislem {
 		this.renk = renk;
 		this.marka = marka;
 		this.fiyat = fiyat;
+		this.girisTarih = girisTarih;
+		this.cikisTarih=cikisTarih;
 	}
 	public String getMarka() {
 		return marka;
@@ -181,13 +191,21 @@ public class Aracislem {
 	public Boolean getSmsSent() {
 		return smsSent;
 	}
-	
-	
 
-	
-	
-	
-	
-	
-	
+
+	public Date getGirisTarih() {
+		return girisTarih;
+	}
+
+	public void setGirisTarih(Date girisTarih) {
+		this.girisTarih = girisTarih;
+	}
+
+	public Date getCikisTarih() {
+		return cikisTarih;
+	}
+
+	public void setCikisTarih(Date cikisTarih) {
+		this.cikisTarih = cikisTarih;
+	}
 }

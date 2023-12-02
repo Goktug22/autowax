@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,12 +76,13 @@ public class AracislemController {
 	
 	
 	@PatchMapping("/archivearacislembyid/{id}")
-	public ResponseEntity<Aracislem> archiveAracislemById (@PathVariable long id , @RequestParam Integer odemeYontemi, @RequestParam Integer alinanOdeme   ){
+	public ResponseEntity<Aracislem> archiveAracislemById (@PathVariable long id ,@RequestBody Aracislem aracislem  ){
 		
 		Aracislem ai = aracislemRepository.findById(id).orElseThrow( () -> new ResourceNotFoundException ( "Aracislem does not exists with id:  " + id )  );
 		ai.setAktif(false);
-		ai.setOdemeYontemi(odemeYontemi);
-		ai.setAlinanOdeme(alinanOdeme);
+		ai.setOdemeYontemi(aracislem.getOdemeYontemi());
+		ai.setAlinanOdeme(aracislem.getAlinanOdeme());
+		ai.setCikisTarih(aracislem.getCikisTarih());
 		aracislemRepository.save(ai);
 		return ResponseEntity.ok(ai);
 		
