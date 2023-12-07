@@ -16,7 +16,7 @@ public class JwtUtil {
 
 
     private final SecretKey secret_key = Jwts.SIG.HS256.key().build();
-    private long accessTokenValidity = 60*60*1000;
+    private long accessTokenValidity = 60;//60dk
 
     private final JwtParser jwtParser;
 
@@ -70,6 +70,7 @@ public class JwtUtil {
 
     public boolean validateClaims(Claims claims) throws AuthenticationException {
         try {
+            System.out.println("TOKEN EXPIRES AT "  + claims.getExpiration());
             return claims.getExpiration().after(new Date());
         } catch (Exception e) {
             throw e;
