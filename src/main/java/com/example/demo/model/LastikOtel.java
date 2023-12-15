@@ -31,6 +31,9 @@ public class LastikOtel {
 	@Column( name = "cikis_tarih")
 	private Date cikisTarih;
 
+	@Column ( name="otel_no")
+	private Integer otelNo;
+
 
 
 
@@ -113,5 +116,13 @@ public class LastikOtel {
 
 	public void setCikisTarih(Date cikisTarih) {
 		this.cikisTarih = cikisTarih;
+	}
+
+	public Integer getOtelNo() {
+		return otelNo;
+	}
+
+	public void setOtelNo(Integer otelNo) {
+		this.otelNo = otelNo;
 	}
 }

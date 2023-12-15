@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.repository.IslemRepository;
 
-@CrossOrigin()
 @RestController
 @RequestMapping("/api/v1/")
 public class LastikOtelController {
@@ -37,6 +36,12 @@ public class LastikOtelController {
     public LastikOtel addLastikOtel(@RequestBody LastikOtel lastikOtel) {
         lastikOtel.setGirisTarih( new Date());
         lastikOtel.setAktif(true);
+        //set the otelNo
+
+        Integer availableOtelNo = lastikOtelRepository.findFirstAvailableOtelNo().orElse(1); // default to 1 if none found
+        lastikOtel.setOtelNo(availableOtelNo);
+
+
         return lastikOtelRepository.save( lastikOtel);
     }
 
@@ -47,6 +52,7 @@ public class LastikOtelController {
         LastikOtel lo = lastikOtelRepository.findById(id).orElseThrow( () -> new ResourceNotFoundException ( "Lastik otel does not exists with id:  " + id )  );
        lo.setAktif(false);
        lo.setCikisTarih(new Date());
+       lo.setOtelNo(null);
        return ResponseEntity.ok(lastikOtelRepository.save(lo));
 
     }

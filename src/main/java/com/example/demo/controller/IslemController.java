@@ -18,7 +18,6 @@ import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.Islem;
 import com.example.demo.repository.IslemRepository;
 
-@CrossOrigin()
 @RestController
 @RequestMapping("/api/v1/")
 public class IslemController {

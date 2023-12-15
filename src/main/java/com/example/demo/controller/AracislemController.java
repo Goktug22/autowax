@@ -21,7 +21,7 @@ import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.Aracislem;
 import com.example.demo.repository.AracislemRepository;
 
-@CrossOrigin()
+
 @RestController
 @RequestMapping("/api/v1/")
 public class AracislemController {
