@@ -56,6 +56,14 @@ public class AracislemController {
 		return ResponseEntity.ok(aracislem);
 		
 	}
+
+
+	@GetMapping("/aracislemlast3/{plaka}")
+	public ResponseEntity<List<Aracislem>>   getAracislemLast3ByPlaka ( @PathVariable String plaka){
+		List<Aracislem> aracislem = aracislemRepository.findLast3ByPlaka(plaka);
+		return ResponseEntity.ok(aracislem);
+
+	}
 	
 	//get aracislem by id
 	@GetMapping("/aracislembyid/{id}")
