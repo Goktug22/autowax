@@ -1,11 +1,10 @@
 package com.example.demo.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.example.demo.model.serializer.PersonelSerializer;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import jakarta.persistence.*;
 
 import java.util.Date;
 
@@ -48,6 +47,10 @@ public class Aracislem {
 	@Column( name = "alinan_odeme")
 	private Integer alinanOdeme;
 
+	@Column( name = "bahsis")
+	private Integer bahsis;
+
+
 	@Column( name = "sms_sent")
 	private Boolean smsSent;
 	
@@ -59,6 +62,11 @@ public class Aracislem {
 
 	@Column( name = "cikis_tarih")
 	private Date cikisTarih;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "personel_id")
+	@JsonSerialize(using = PersonelSerializer.class)
+	private Personel personel;
 
 
 
@@ -207,5 +215,21 @@ public class Aracislem {
 
 	public void setCikisTarih(Date cikisTarih) {
 		this.cikisTarih = cikisTarih;
+	}
+
+	public Personel getPersonel() {
+		return personel;
+	}
+
+	public void setPersonel(Personel personel) {
+		this.personel = personel;
+	}
+
+	public Integer getBahsis() {
+		return bahsis;
+	}
+
+	public void setBahsis(Integer bahsis) {
+		this.bahsis = bahsis;
 	}
 }

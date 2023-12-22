@@ -3,6 +3,8 @@ package com.example.demo.controller;
 import java.util.Date;
 import java.util.List;
 
+import com.example.demo.model.Personel;
+import com.example.demo.repository.PersonelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -27,7 +29,8 @@ import com.example.demo.repository.AracislemRepository;
 public class AracislemController {
 	@Autowired
 	private AracislemRepository aracislemRepository;
-	
+	@Autowired
+	private PersonelRepository personelRepository;
 	//get all
 	
 	@GetMapping("/aracislem")
@@ -91,6 +94,12 @@ public class AracislemController {
 		ai.setOdemeYontemi(aracislem.getOdemeYontemi());
 		ai.setAlinanOdeme(aracislem.getAlinanOdeme());
 		ai.setCikisTarih(aracislem.getCikisTarih());
+		ai.setBahsis(aracislem.getBahsis());
+
+		Personel personel = personelRepository.findById(aracislem.getPersonel().getId())
+				.orElseThrow(() -> new RuntimeException("Personel not found"));
+		ai.setPersonel(personel);
+
 		aracislemRepository.save(ai);
 		return ResponseEntity.ok(ai);
 		
