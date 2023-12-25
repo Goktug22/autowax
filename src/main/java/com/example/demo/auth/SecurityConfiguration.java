@@ -1,4 +1,5 @@
 package com.example.demo.auth;
+import com.example.demo.exception.CustomAccessDeniedHandler;
 import com.example.demo.service.MyUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -57,7 +58,11 @@ public class SecurityConfiguration  {
                         sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
                 // Add JWT filter before UsernamePasswordAuthenticationFilter
-                .addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class)
+
+                .exceptionHandling(exceptionHandling ->
+                        exceptionHandling.accessDeniedHandler(new CustomAccessDeniedHandler())
+                );
 
         return http.build();
     }

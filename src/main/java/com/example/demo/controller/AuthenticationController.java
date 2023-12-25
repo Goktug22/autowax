@@ -32,11 +32,11 @@ public class AuthenticationController {
     @PostMapping("/authenticate")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
         try {
-            System.out.println("PLEASE");
+
             Authentication authentication = authenticationManager
                     .authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword()));
 
-            System.out.println("PLEASE2");
+
         } catch (AuthenticationException e) {
             throw new Exception("Incorrect username or password", e);
         }

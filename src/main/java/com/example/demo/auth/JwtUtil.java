@@ -70,7 +70,6 @@ public class JwtUtil {
 
     public boolean validateClaims(Claims claims) throws AuthenticationException {
         try {
-            System.out.println("TOKEN EXPIRES AT "  + claims.getExpiration());
             return claims.getExpiration().after(new Date());
         } catch (Exception e) {
             throw e;
