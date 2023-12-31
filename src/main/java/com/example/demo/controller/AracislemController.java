@@ -96,8 +96,7 @@ public class AracislemController {
 		ai.setCikisTarih(aracislem.getCikisTarih());
 		ai.setBahsis(aracislem.getBahsis());
 
-		Personel personel = personelRepository.findById(aracislem.getPersonel().getId())
-				.orElseThrow(() -> new RuntimeException("Personel not found"));
+		Personel personel = personelRepository.findById(aracislem.getPersonel().getId()).orElse(null);
 		ai.setPersonel(personel);
 
 		aracislemRepository.save(ai);
